@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appblog.apps.AppblogConfig',
     'appQuestion.apps.AppquestionConfig',
+    'appAccount.apps.AppaccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'myblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['myblog/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

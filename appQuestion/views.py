@@ -1,11 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Question
+from django.core.paginator import Paginator
 
 # Create your views here.
 def question(request):
     questions = Question.objects
-    return render(request, 'question.html', {'questions' : questions})
+    question_list = Question.objects.all()
+    paginator = Paginator(question_list,3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'question.html', {'questions' : questions, 'posts' : posts})
 
 def read_question(request, question_id):
     read_questions = get_object_or_404(Question, pk = question_id)
