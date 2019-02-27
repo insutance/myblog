@@ -1,3 +1,5 @@
+{% load socialaccount %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,9 +49,13 @@
                     <div class="col-sm-4 offset-md-1 py-4">
                         <h4 class="text-white">Account</h4>
                         <ul class="list-unstyled">
+                            {% if user.is_authenticated %}
+                            <li class="text-white">{{ user.username }} 님 환영합니다!</li><br>
+                            <li><a href="{% url 'logout' %}" class="text-white">로그아웃</a></li>
+                            {% else %}
                             <li><a href="{% url 'signup' %}" class="text-white">회원가입</a></li>
                             <li><a href="{% url 'login' %}" class="text-white">로그인</a></li>
-                            <li><a href="{% url 'logout' %}" class="text-white">로그아웃</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -137,4 +143,4 @@
   {% block contents %}
   
   {% endblock %}
-  </body>
+  </html>

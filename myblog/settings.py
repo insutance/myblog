@@ -20,10 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*=+v7ptwj34b8+j^2rcj9cox*u)845aler1q9$53gb^b5!**o-'
+#SECRET_KEY = '*=+v7ptwj34b8+j^2rcj9cox*u)845aler1q9$53gb^b5!**o-'
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '*=+v7ptwj34b8+j^2rcj9cox*u)845aler1q9$53gb^b5!**o-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = []
 
@@ -40,6 +43,13 @@ INSTALLED_APPS = [
     'appblog.apps.AppblogConfig',
     'appQuestion.apps.AppquestionConfig',
     'appAccount.apps.AppaccountConfig',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    
 ]
 
 MIDDLEWARE = [
@@ -131,3 +141,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'

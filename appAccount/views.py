@@ -9,7 +9,7 @@ def signup(request):
             user = User.objects.create_user(username = request.POST['inputUsername'], password = request.POST['inputPassword'])
             auth.login(request, user)
             return redirect('home')
-    return render(request, 'signup.html')
+    return render(request, 'home.html')
 
 def login(request):
     if request.method == 'POST':
